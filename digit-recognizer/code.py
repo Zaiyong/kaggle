@@ -20,5 +20,11 @@ def trainSVMModel(X,Y,test_X,test_Y):
     print('svm dump')
     joblib.dump(clf, 'svm.pkl')
     evaluateModel(clf,test_X,test_Y)
+def trainRFModel(X,Y,test_X,test_Y):
+    clf = RandomForestClassifier(max_depth=2, random_state=0)
+    print('rf fit')
+    clf.fit(X, Y)
+    joblib.dump(clf, 'random_forest.pkl')
+    evaluateModel(clf,test_X,test_Y)
 if __name__=='__main__':
     train_X,train_Y,test_X,test_Y=loadTrain('./train.csv')
