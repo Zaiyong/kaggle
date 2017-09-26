@@ -32,5 +32,15 @@ def trainAdaBoostModel(X,Y,test_X,test_Y):
     clf.fit(X,Y)
     joblib.dump(clf, 'ada_boost.pkl')
     evaluateModel(clf,test_X,test_Y)
+def trainGradientBoostingModel(X,Y,test_X,test_Y):
+    clf=GradientBoostingClassifier(
+                                    n_estimators=100,
+                                    learning_rate=1.0,
+                                    max_depth=1,
+                                    random_state=0)
+    print('grandient boosting fit')
+    clf.fit(X, Y)
+    joblib.dump(clf, 'gradient_boosting.pkl')
+    evaluateModel(clf,test_X,test_Y)
 if __name__=='__main__':
     train_X,train_Y,test_X,test_Y=loadTrain('./train.csv')
