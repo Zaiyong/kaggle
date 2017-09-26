@@ -26,5 +26,11 @@ def trainRFModel(X,Y,test_X,test_Y):
     clf.fit(X, Y)
     joblib.dump(clf, 'random_forest.pkl')
     evaluateModel(clf,test_X,test_Y)
+def trainAdaBoostModel(X,Y,test_X,test_Y):
+    clf=AdaBoostClassifier(n_estimators=100)
+    print('ada boost fit')
+    clf.fit(X,Y)
+    joblib.dump(clf, 'ada_boost.pkl')
+    evaluateModel(clf,test_X,test_Y)
 if __name__=='__main__':
     train_X,train_Y,test_X,test_Y=loadTrain('./train.csv')
