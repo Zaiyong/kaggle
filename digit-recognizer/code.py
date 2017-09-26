@@ -13,6 +13,10 @@ def loadTrain(train_file,test_file):
     print(test_X_df.shape)
     print(test_Y_df.shape)
     return train_X_df.as_matrix(),train_Y_df.as_matrix(),test_X_df.as_matrix(),test_Y_df.as_matrix()
+
+def evaluateModel(clf,test_X,test_Y):
+    print(clf.score(test_X,test_Y))
+
 def trainSVMModel(X,Y,test_X,test_Y):
     clf = svm.SVC()
     print('svm fit')
@@ -20,18 +24,21 @@ def trainSVMModel(X,Y,test_X,test_Y):
     print('svm dump')
     joblib.dump(clf, 'svm.pkl')
     evaluateModel(clf,test_X,test_Y)
+
 def trainRFModel(X,Y,test_X,test_Y):
     clf = RandomForestClassifier(max_depth=2, random_state=0)
     print('rf fit')
     clf.fit(X, Y)
     joblib.dump(clf, 'random_forest.pkl')
     evaluateModel(clf,test_X,test_Y)
+
 def trainAdaBoostModel(X,Y,test_X,test_Y):
     clf=AdaBoostClassifier(n_estimators=100)
     print('ada boost fit')
     clf.fit(X,Y)
     joblib.dump(clf, 'ada_boost.pkl')
     evaluateModel(clf,test_X,test_Y)
+
 def trainGradientBoostingModel(X,Y,test_X,test_Y):
     clf=GradientBoostingClassifier(
                                     n_estimators=100,
@@ -42,5 +49,14 @@ def trainGradientBoostingModel(X,Y,test_X,test_Y):
     clf.fit(X, Y)
     joblib.dump(clf, 'gradient_boosting.pkl')
     evaluateModel(clf,test_X,test_Y)
+
 if __name__=='__main__':
     train_X,train_Y,test_X,test_Y=loadTrain('./train.csv')
+    # print('train svm')
+    # trainSVMModel(train_X,train_Y,test_X,test_Y)
+    # print('train rf')
+    # trainRFModel(train_X,train_Y,test_X,test_Y)
+    print('train adboost')
+    trainAdaBoostModel(train_X,train_Y,test_X,test_Y)
+    print('train gradient boost')
+    trainGradientBoostingModel(train_X,train_Y,test_X,test_Y)
