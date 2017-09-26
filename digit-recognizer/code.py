@@ -13,5 +13,12 @@ def loadTrain(train_file,test_file):
     print(test_X_df.shape)
     print(test_Y_df.shape)
     return train_X_df.as_matrix(),train_Y_df.as_matrix(),test_X_df.as_matrix(),test_Y_df.as_matrix()
+def trainSVMModel(X,Y,test_X,test_Y):
+    clf = svm.SVC()
+    print('svm fit')
+    clf.fit(X, Y)
+    print('svm dump')
+    joblib.dump(clf, 'svm.pkl')
+    evaluateModel(clf,test_X,test_Y)
 if __name__=='__main__':
     train_X,train_Y,test_X,test_Y=loadTrain('./train.csv')
