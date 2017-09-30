@@ -3,3 +3,6 @@
 *.dyc
 *.csv
 *.zip
+*pyc
+*.h5
+*.sqlite
